@@ -2,7 +2,7 @@ let total_game_result = 0;
 
 function getComputerChoice() {
     const hand = ['Rock', 'Scissors', 'Paper'];
-    random = Math.floor(Math.random() * 3)
+    random = Math.floor(Math.random() * 3);
     console.log(hand[random]);
     return hand[random];
 }
