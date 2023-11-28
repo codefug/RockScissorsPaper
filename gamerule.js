@@ -1,3 +1,10 @@
+
+// playRound 함수를 부르는 listener를 버튼에 추가
+
+// 버튼이 눌러지면 맞는 playerSelection을 부른다, console.log로 확인
+
+// 결과를 보여주는 div, 모든 console.log를 DOM method로
+
 let total_game_result = 0;
 
 function getComputerChoice() {
@@ -49,6 +56,12 @@ function game(game_result) {
         console.log("total: you lose");
     }
 }
+
+const rockBtn=document.querySelector("#rockButton");
+const paperBtn=document.querySelector("#paperButton");
+const scissorsBtn=document.querySelector('#scissorsButton');
+
+rockBtn.addEventListener('click',(event)=>{})
 
 for (let i = 1; i < 6; i++) {
     console.log(i + ": game start");

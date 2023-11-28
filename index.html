@@ -1,11 +1,40 @@
+<!-- 5 라운드를 플레이하는 로직 제거
+
+한 seletion 당 하나씩 버튼
+
+running score를 보여주고 5점 얻으면 승자를 발표한다. -->
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="gamecss.css">
     <script src="gamerule.js"></script>
 </head>
+
 <body>
+    <h1>가위바위보 싱글플레이</h1>
+    <div id="gameField">
+        <h2>가위 바위 보 중에 어떤 걸 내고 싶나요?</h2>
+        <div id="rock">
+            <button id="rockButton"></button>
+        </div>
+
+        <div id="scissors">
+            <button id="scissorsButton"></button>
+        </div>
+
+        <div id="paper">
+            <button id="paperButton"></button>
+        </div>
+    </div>
+    <div id="result">
+        <div id="resultScore"></div>
+        <div id="resultWinner"></div>
+    </div>
 </body>
+
 </html>

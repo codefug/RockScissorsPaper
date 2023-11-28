@@ -13,14 +13,14 @@ Using JS, I'll make RockScissorsPaper game.
 
 2. 추가 사항
 
-5 라운드를 플레이하는 로직 제거
+    5 라운드를 플레이하는 로직 제거
 
-한 seletion 당 세개의 버튼
+    한 seletion 당 세개의 버튼
 
-playRound 함수를 부르는 listener를 버튼에 추가
+    playRound 함수를 부르는 listener를 버튼에 추가
 
-버튼이 눌러지면 맞는 playerSelection을 부른다, console.log로 확인
+    버튼이 눌러지면 맞는 playerSelection을 부른다, console.log로 확인
 
-결과를 보여주는 div, 모든 console.log를 DOM method로
+    결과를 보여주는 div, 모든 console.log를 DOM method로
 
-running score를 보여주고 5점 얻으면 승자를 발표한다.
+    running score를 보여주고 5점 얻으면 승자를 발표한다.
