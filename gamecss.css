@@ -1,0 +1,97 @@
+
+/* 전체 조건 */
+body{
+    margin: 0;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:20px;
+}
+img{
+    height: 300px;
+    width:300px;;
+}
+#h1Content{
+    color: white;
+    background-color: black;
+    padding: 10px;
+}
+#h2Content{
+    display: inline-block;
+    color: white;
+    border-radius: 10px;
+    border: 1px solid blue;
+    background-color: aqua;
+    padding: 0px 20px;
+}
+h2{
+    margin:10px 0px;
+}
+
+/* headContent */
+#headContent{
+    align-self: stretch;
+    text-align: center;
+}
+#headLanguageSelector{
+    margin-top: 20px;
+    text-align: end;
+}
+#lan{
+    margin: 10px;
+}
+
+/* gameField */
+/* 0. h2 처리,score */
+#gameField{
+    text-align: center;
+}
+#eachScore{
+    text-align: left;
+    margin: 20px;
+}
+/* 1. 이미지필드 flex에 wrap 씌우기 */
+#imageContainer{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 40px;
+    justify-content: center;
+}
+/* 2. img border 처리*/
+#rockButton,#scissorsButton,#paperButton{
+    border-radius: 10px;
+}
+/* result */
+/* 1. resultWinner Score에 flex, space-evenly*/
+#result{
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+}
+#resultWinner,#resultScore{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 20px;
+}
+/* 2. winnderButton 가운데로 버튼 좀 크고 이쁘게*/
+
+/* 3. result h2 처리*/
+.resultContent{
+    margin-bottom: 40px;
+    align-self: center;
+}
+/* 4. winnerButton 처리*/
+#winnerButtonContainer{
+    margin: 40px;
+    align-self: center;
+}
+/* reset */
+/* 다시하기는 맨 오른쪽 */
+.reset{
+    align-self: stretch;
+    text-align: end;
+    margin: 20px;
+}
