@@ -98,6 +98,9 @@ function changeChoiceToIndex(Choice) {
 }
 const IndexToChoiceList = ['rock', 'scissors', 'paper']
 const IndexToImageList = ['rock.jpg', 'scissors.webp', 'paper.jpg']
+const eachScoreRecord = document.querySelector("#eachScore>h3")
+const thisRound=document.querySelector(".thisRound");
+
 // 게임 이벤트
 // 컴퓨터는 번호를, 사용자는 문자열을 입력
 // 승리 공식에 따라 return 값을 뱉음. 틀리면 재대결, 즉 이 함수에서는
@@ -106,24 +109,44 @@ function playRound(playerIndex, computerChoice) {
     rules = [[1, 2], [2, 0], [0, 1]];
     if (rules[playerIndex][0] == computerChoice) {
         // 각 라운드 경기 결과
-        const eachScoreRecord = document.querySelector("#eachScore>h3")
-        console.log(eachScoreRecord);
         eachScoreRecord.innerHTML += `${++Round}: ${IndexToChoiceList[playerIndex]} : ${IndexToChoiceList[computerChoice]}
         (win)<br>`;
         // thisRound 초기화
+        thisRound.replaceChildren();
         // thisROund에 사진 추가
+        const newNode1 = document.createElement("img");
+        newNode1.setAttribute('src',IndexToImageList[playerIndex]);
+        const newNode2 = document.createElement("img");
+        newNode2.setAttribute('src',IndexToImageList[computerChoice]);
+        newNode1.setAttribute('style','height:150px;');
+        newNode2.setAttribute('style','height:150px;');
+        thisRound.appendChild(newNode1);
+        thisRound.appendChild(newNode2);
         return 1;
     } else if (rules[playerIndex][1] == computerChoice) {
         // 각 라운드 경기 결과
-        const eachScoreRecord = document.querySelector("#eachScore>h3")
         eachScoreRecord.innerHTML += `${++Round}: ${IndexToChoiceList[playerIndex]} : ${IndexToChoiceList[computerChoice]}
         (lose)<br>`;
         // thisRound 초기화
+        thisRound.replaceChildren();
         // thisROund에 사진 추가
+        const newNode1 = document.createElement("img");
+        newNode1.setAttribute('src',IndexToImageList[playerIndex]);
+        const newNode2 = document.createElement("img");
+        newNode2.setAttribute('src',IndexToImageList[computerChoice]);
+        newNode1.setAttribute('style','height:150px;');
+        newNode2.setAttribute('style','height:150px;');
+        thisRound.appendChild(newNode1);
+        thisRound.appendChild(newNode2);
         return 0;
     } else {
         // thisRound 초기화
+        thisRound.replaceChildren();
         // thisRound에 Tie 사진 삽입
+        const newNode = document.createElement("img");
+        newNode.setAttribute('src','Tie.avif');
+        newNode.setAttribute('style','height:150px;');
+        thisRound.appendChild(newNode);
         console.log("비겼습니다.")
         return;
     }
