@@ -1,3 +1,14 @@
+/* js에 쓰는 css */
+.active{
+    background-color: gray;
+    border-color: aqua;
+    padding:5px;
+}
+.hovering{
+    font-size: 300px;
+    height: auto;
+    width: auto;
+}
 
 /* 전체 조건 */
 body{
@@ -11,7 +22,7 @@ body{
 }
 img{
     height: 300px;
-    width:300px;;
+    width:300px;
 }
 #h1Content{
     color: white;
@@ -29,6 +40,12 @@ img{
 h2{
     margin:10px 0px;
 }
+.niceButton{
+    background-color: aqua;
+    border-radius: 30px;
+    padding: 20px;
+    border:none;
+}
 
 /* headContent */
 #headContent{
@@ -42,7 +59,11 @@ h2{
 #lan{
     margin: 10px;
 }
-
+#eachScore{
+    display:flex;
+    justify-content: space-between;
+    height:150px;
+}
 /* gameField */
 /* 0. h2 처리,score */
 #gameField{
@@ -63,6 +84,7 @@ h2{
 /* 2. img border 처리*/
 #rockButton,#scissorsButton,#paperButton{
     border-radius: 10px;
+    padding: 0px;
 }
 /* result */
 /* 1. resultWinner Score에 flex, space-evenly*/

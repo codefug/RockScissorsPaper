@@ -1,77 +1,168 @@
+// 0. 언어 팩 설정
+const lanPack = [['가위바위보 페이지', 'RockScissorsPaper Page'
+], ['영화버전 가위바위보', 'RockScissorsPaper Movie Version'
+], ['language Settings', '언어 설정'
+], ['가위 바위 보 중에 어떤 걸 내고 싶나요?', 'What Would You Like To Do?'
+], ['게임 결과', 'Game Result'
+], ['승자', 'Winner'
+], ['총 스코어', 'Total Score'
+], ['<span>축하</span>해줘', 'Give <span>Congratulation</span>'
+], ["다시하기", "Retry"
+]]
 
-// playRound 함수를 부르는 listener를 버튼에 추가
+// 1. 언어 설정
 
-// 버튼이 눌러지면 맞는 playerSelection을 부른다, console.log로 확인
+// query 선택
+const languageSelection = document.querySelector("#headLanguageSelector");
 
-// 결과를 보여주는 div, 모든 console.log를 DOM method로
+// 선택되면 h1Content, headLanguageSelector>label, 
+// h2Content>h2, #h2Content>h2, #resultWinner>div
+// #resultScore>div, #winnerButtonContainer>button>span(congraduaration도 바꿔야됨.)
+// #reset>resetButton 전부 영어로 변경 기능 구현
 
-// let total_game_result = 0;
+languageSelection.addEventListener('change', (event) => {
+    const classLabel = document.querySelectorAll('.label');
+    if (event.target.value == 'en') {
+        for (let i = 0; i < classLabel.length; i++) {
+            classLabel[i].textContent = lanPack[i][1];
+            classLabel[7].innerHTML = lanPack[7][1]
+        }
+    } else {
+        for (let i = 0; i < classLabel.length; i++) {
+            classLabel[i].textContent = lanPack[i][0];
+        }
+        classLabel[7].innerHTML = lanPack[7][0]
+    }
+});
 
-// function getComputerChoice() {
-//     const hand = ['Rock', 'Scissors', 'Paper'];
-//     random = Math.floor(Math.random() * 3);
-//     console.log(hand[random]);
-//     return hand[random];
-// }
+// 2. 게임 로직 
 
-// function getUserChoice() {
-//     text = prompt("pick Rock Scissors Paper");
-//     console.log(text);
-//     return text;
-// }
+// 전체 게임 스코어
+let total_game_result = 0;
+let Round = 0;
 
-// function playRound(playerChoice, computerChoice) {
-//     rules = [[1, 2], [2, 0], [0, 1]];
-//     const playerIndex = changeChoiceToNumber(playerChoice);
-//     const computerIndex = changeChoiceToNumber(computerChoice);
-//     if (rules[playerIndex][0] == computerIndex) {
-//         return 1;
-//     } else if (rules[playerIndex][1] == computerIndex) {
-//         return 0;
-//     } else {
-//         console.log("Tie!");
-//         return playRound(getUserChoice(), getComputerChoice());
-//     }
-// }
+// 컴퓨터 선택 0: rock, 1: scissors, 2: paper
+function getComputerChoice() {
+    random = Math.floor(Math.random() * 3);
+    return random;
+}
 
-// function changeChoiceToNumber(yourChoice) {
-//     let Choice = yourChoice.toUpperCase();
-//     if (Choice == "ROCK") {
-//         return 0;
-//     } else if (Choice == "SCISSORS") {
-//         return 1;
-//     } else if (Choice == "PAPER") {
-//         return 2;
-//     } else {
-//         console.log("wrong Format");
-//         return changeChoiceToNumber(getUserChoice());
-//     }
-// }
+// 버튼 이벤트
+// 1. 버튼을 누르면 event효과로 해당 button의 id를 뽑아서 해당 인덱스로 
+// playRound로 비교한 뒤 결과를 total_game_result에 전달,
+// eachScore에 ${Round} user: computer (win or lose), 형식으로 전달,
+// thisRound로 사진 두개 전달
+function getUserChoice(text) {
+    return text.replace('Button', '');
+}
 
-// function game(game_result) {
-//     console.log(`total: ${game_result}`);
-//     if (game_result >= 3) {
-//         console.log("total: you win");
-//     } else {
-//         console.log("total: you lose");
-//     }
-// }
+//클릭시 이벤트
+const UserChoice = document.querySelectorAll('.userChoice')
+for (let i = 0; i < 3; i++) {
+    UserChoice[i].addEventListener('click', (event) => {
+        for (US of UserChoice) {
+            if (US.classList.contains("active")) {
+                US.classList.remove("active")
+            }
+        }
+        UserChoice[i].classList.add("active")
+    })
+}//더블 클릭 이벤트
+for (let i = 0; i < 3; i++) {
+    UserChoice[i].addEventListener('dblclick', (event) => {
+        if (Round != 5) {
+            const n = playRound(changeChoiceToIndex(UserChoice[i].id), getComputerChoice());
+            if (n == null) {
+                return;
+            } else {
+                // 총 스코어 +n
+                total_game_result += n;
+                console.log(Round);
+                if (Round==5){
+                    finish();
+                }
+            }
+        }
+    })
+}
 
-// const rockBtn=document.querySelector("#rockButton");
-// const paperBtn=document.querySelector("#paperButton");
-// const scissorsBtn=document.querySelector('#scissorsButton');
+//string을 인덱스값으로 바꾸는 함수
+function changeChoiceToIndex(Choice) {
+    if (Choice == 'rock') {
+        return 0;
+    } else if (Choice == 'scissors') {
+        return 1;
+    } else {
+        return 2;
+    }
+}
+const IndexToChoiceList = ['rock', 'scissors', 'paper']
+const IndexToImageList = ['rock.jpg', 'scissors.webp', 'paper.jpg']
+// 게임 이벤트
+// 컴퓨터는 번호를, 사용자는 문자열을 입력
+// 승리 공식에 따라 return 값을 뱉음. 틀리면 재대결, 즉 이 함수에서는
+// 게임 결과만 출력하게 해야됨.
+function playRound(playerIndex, computerChoice) {
+    rules = [[1, 2], [2, 0], [0, 1]];
+    if (rules[playerIndex][0] == computerChoice) {
+        // 각 라운드 경기 결과
+        const eachScoreRecord = document.querySelector("#eachScore>h3")
+        console.log(eachScoreRecord);
+        eachScoreRecord.innerHTML += `${++Round}: ${IndexToChoiceList[playerIndex]} : ${IndexToChoiceList[computerChoice]}
+        (win)<br>`;
+        // thisRound 초기화
+        // thisROund에 사진 추가
+        return 1;
+    } else if (rules[playerIndex][1] == computerChoice) {
+        // 각 라운드 경기 결과
+        const eachScoreRecord = document.querySelector("#eachScore>h3")
+        eachScoreRecord.innerHTML += `${++Round}: ${IndexToChoiceList[playerIndex]} : ${IndexToChoiceList[computerChoice]}
+        (lose)<br>`;
+        // thisRound 초기화
+        // thisROund에 사진 추가
+        return 0;
+    } else {
+        // thisRound 초기화
+        // thisRound에 Tie 사진 삽입
+        console.log("비겼습니다.")
+        return;
+    }
+}
 
-// rockBtn.addEventListener('click',(event)=>{})
+// reset
+const resetButton = document.querySelector('#resetButton');
+resetButton.addEventListener('click', () => { location.reload() });
 
-// for (let i = 1; i < 6; i++) {
-//     console.log(i + ": game start");
-    
-//     const playerSelection = getUserChoice();
-//     const computerSelection = getComputerChoice();
+const winnerButton=document.querySelector("#winnerButton");
+// result
+// 1. total_game_result>=3 이면 resultWInner.winner은 User
+// 2. 아니면 Computer
+// 3. resultScore.score에 total_game_result : Round-total_game_result 전달
+// 4. .label>span에 클릭하면 커졌다가 작아지는 이벤트 추가
+function finish() {
+    console.log(total_game_result);
+    for (let i = 0; i < 3; i++) {
+        UserChoice[i].disabled = true;
+    }
+    resetButton.disabled=false;
+    if (total_game_result>=3){
+        winnerButton.disabled=false;
+        const resultWInner=document.querySelector("#resultWinner>#winner");
+        resultWInner.textContent='User!';
+        const resultScore=document.querySelector("#resultScore>#score");
+        resultScore.textContent=`${total_game_result} : ${Round-total_game_result}`
+    }else{
+        const resultWInner=document.querySelector("#resultWinner>#winner");
+        resultWInner.textContent='YOU';
+        const resultScore=document.querySelector("#resultScore>#score");
+        resultScore.textContent=`${total_game_result} : ${Round-total_game_result}`
+    }
+}
 
-//     game_result = playRound(playerSelection, computerSelection);
-//     console.log(game_result==1 ? "win" : "lose");
-//     total_game_result+=game_result;
-// }
+function congratulation(){
+    const winnerButtonContainer = document.querySelector("#winnerButtonContainer>.niceButton>span")
+    winnerButtonContainer.classList.add("hovering");
+    setTimeout(() => {winnerButtonContainer.classList.remove("hovering")},2000);
+}
 
-// game(total_game_result);
+winnerButton.addEventListener('click',congratulation);

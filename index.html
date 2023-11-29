@@ -10,7 +10,7 @@ running score를 보여주고 5점 얻으면 승자를 발표한다. -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title class="label">가위바위보</title>
     <link rel="stylesheet" href="gamecss.css">
     <script src="gamerule.js" defer></script>
 </head>
@@ -18,10 +18,10 @@ running score를 보여주고 5점 얻으면 승자를 발표한다. -->
 <body>
     <div id="headContent">
         <div id="h1Content">
-            <h1>영화버전 가위바위보</h1>
+            <h1 class="label">영화버전 가위바위보</h1>
         </div>
         <div id="headLanguageSelector">
-            <label for="lan">언어 설정</label>
+            <label for="lan" class="label">언어 설정</label>
             <select name="language" id="lan">
                 <option value="en">English</option>
                 <option value="ko" selected>Korean</option>
@@ -32,22 +32,23 @@ running score를 보여주고 5점 얻으면 승자를 발표한다. -->
     <div id="gameField">
 
         <div id="h2Content">
-            <h2>가위 바위 보 중에 어떤 걸 내고 싶나요?</h2>
+            <h2 class="label">가위 바위 보 중에 어떤 걸 내고 싶나요?</h2>
         </div>
 
         <div id="eachScore">
-            <h3>?라운드:?</h3>
+            <h3></h3>
+            <div class="thisRound"></div>
         </div>
 
         <div id="imageContainer">
-            <div id="rock">
+            <div id="rock" class="userChoice">
                 <button id="rockButton"><img src="rock.jpg" alt="This is rock man of the movie Thor"></button>
             </div>
-            <div id="scissors">
+            <div id="scissors"  class="userChoice">
                 <button id="scissorsButton"><img src="scissors.webp"
                         alt="This is scissors man of the movie Scissorsman"></button>
             </div>
-            <div id="paper">
+            <div id="paper" class="userChoice">
                 <button id="paperButton"><img src="paper.jpg" alt="This is paper man of the movie paper man"></button>
             </div>
         </div>
@@ -57,25 +58,25 @@ running score를 보여주고 5점 얻으면 승자를 발표한다. -->
     <div id="result">
 
         <div id="h2Content" class="resultContent">
-            <h2>게임 결과</h2>
+            <h2 class="label">게임 결과</h2>
         </div>
 
         <div id="resultWinner">
-            <div>승자</div>
+            <div class="label">승자</div>
             <div id="winner">??</div>
         </div>
         <div id="resultScore">
-            <div>총 스코어</div>
+            <div class="label">총 스코어</div>
             <div id="score">??:??</div>
         </div>
 
         <div id="winnerButtonContainer">
-            <button id="winnderButton"><span>축하</span>해줭</button>
+            <button id="winnerButton" class="label niceButton"><span>축하</span>해줭</button>
         </div>
 
     </div>
     <div class="reset">
-        <button id="resetButton">다시하기</button>
+        <button id="resetButton" class="label niceButton" disabled>다시하기</button>
     </div>
 </body>
 
